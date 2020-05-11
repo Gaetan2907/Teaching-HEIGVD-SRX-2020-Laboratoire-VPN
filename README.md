@@ -30,8 +30,8 @@ Dans ce travail de laboratoire, vous allez configurer des routeurs Cisco émulé
 -	Capture Sniffer avec filtres précis sur la communication à épier
 -	Activation du mode « debug » pour certaines fonctions du routeur
 -	Observation des protocoles IPSec
- 
- 
+
+
 ## Matériel
 
 La manière la plus simple de faire ce laboratoire est dans les machines des salles de labo. Le logiciel d'émulation c'est eve-ng. Vous trouverez un [guide très condensé](files/Fonctionnement_EVE-NG.pdf) pour l'utilisation de eve-ng ici.
@@ -108,7 +108,7 @@ Un « protocol » différent de `up` indique la plupart du temps que l’interfa
 
 ---
 
-**Réponse :**  
+**Réponse :**  Non pas de problème 
 
 ---
 
@@ -145,7 +145,7 @@ Pour votre topologie il est utile de contrôler la connectivité entre :
 
 ---
 
-**Réponse :**  
+**Réponse :**  oui tous les ping s
 
 ---
 
@@ -169,6 +169,8 @@ Pour déclencher et pratiquer les captures vous allez « pinger » votre routeur
 ---
 
 **Screenshots :**  
+
+![](/home/gaetan/ownCloud/HEIG-VD/Semestre4/SRX/Labos/Teaching-HEIGVD-SRX-2020-Laboratoire-VPN/images/quest3.png)
 
 ---
 
@@ -239,7 +241,7 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 
 ---
 
-**Réponse :**  
+**Réponse :**  On voit que les paramètres rentrer pour la configuration ont bien été pris en compte. 
 
 ---
 
@@ -248,7 +250,7 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 
 ---
 
-**Réponse :**  
+**Réponse :**  On voit que les paramètres rentrer pour la configuration ont bien été pris en compte. 
 
 ---
 
@@ -341,7 +343,7 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 
 ---
 
-**Réponse :**  
+**Réponse :**  On observe sur la capture que les ping se font à travers le protocole esp. Ceci confirme que la requête ICMP est correctement wrappée par IPsec. 
 
 ---
 
@@ -350,6 +352,12 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 ---
 
 **Réponse :**  
+
+`crypto ipsec security-association` définit la durée de vie des sécurités d’association. 
+
+`crypto isakmp lifetime` durée avant qu’une nouvelle clé de chiffrement soit utilisée. 
+
+
 
 ---
 
@@ -365,6 +373,10 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 **Réponse :**  
 
+C’est le protocole IKE (Internet Key Exange) qui a été utilisé pour échanger les clés. Il permet à chaque partie de ce mettre d’accord sur le protocole, l’algorithme et les clés à utiliser. 
+
+Nous pouvons trouver de la documentation sur les différents protocoles sur le site de [cisco](https://www.cisco.com/c/en/us/td/docs/net_mgmt/vpn_solutions_center/2-0/ip_security/provisioning/guide/IPsecPG1.html#wp1022217) . 
+
 ---
 
 
@@ -373,6 +385,10 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 ---
 
 **Réponse :**  
+
+C’est le mode qui est utilisé de cette manière les autres machines du LAN ne peuvent pas voir le paquet qui est envoyé. 
+
+Nous avons trouvé cette information dans les slides de théories. (SRX20-VPN-IPSec-Part1.pdf slide 15) 
 
 ---
 
@@ -383,6 +399,10 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 **Réponse :**  
 
+C’est tout le paquet qui est chiffré en utilisant AES 192 bits . 
+
+Nous avons trouvé cette information dans les slides de théories (SRX20-VPN-IPSec-Part1.pdf slide 18) 
+
 ---
 
 
@@ -392,6 +412,10 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 **Réponse :**  
 
+En mode tunnel c’est tout le paquet qui est signé, un header contenant la signature est ensuite rajouté au paquet. 
+
+(SRX20-VPN-IPSec-Part2-Part3.pdf slide 9)
+
 ---
 
 
@@ -400,5 +424,9 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 ---
 
 **Réponse :**  
+
+C’est tout le paquet qui est protégé en intégrité. 
+
+(SRX20-VPN-IPSec-Part2-Part3.pdf slide 9)
 
 ---
